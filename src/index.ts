@@ -1,5 +1,6 @@
 import http from 'node:http';
 import { createNewUser } from './actions/createNewUser.js';
+import { getAllUsers } from './actions/getAllUsers.js';
 
 const PORT = process.env.PORT || 3000;
 
@@ -8,6 +9,12 @@ const server = http.createServer(async (req, res) => {
 
   // Set default headers
   res.setHeader('Content-Type', 'application/json');
+
+  // GET /api/users - Get all users
+  if (method === 'GET' && url === '/api/users') {
+    await getAllUsers({ res });
+    return;
+  }
 
   // POST /api/users - Create new user
   if (method === 'POST' && url === '/api/users') {
