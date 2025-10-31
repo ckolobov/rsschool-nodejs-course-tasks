@@ -1,6 +1,7 @@
 import http from 'node:http';
 import { createNewUser } from './actions/createNewUser.js';
 import { getAllUsers } from './actions/getAllUsers.js';
+import { getUserById } from './actions/getUserById.js';
 
 const PORT = process.env.PORT || 3000;
 
@@ -9,6 +10,13 @@ const server = http.createServer(async (req, res) => {
 
   // Set default headers
   res.setHeader('Content-Type', 'application/json');
+
+  // GET /api/users/{userId} - Get user by ID
+  if (method === 'GET' && url?.startsWith('/api/users/')) {
+    const userId = url.split('/')[3];
+    await getUserById({ res, userId });
+    return;
+  }
 
   // GET /api/users - Get all users
   if (method === 'GET' && url === '/api/users') {
