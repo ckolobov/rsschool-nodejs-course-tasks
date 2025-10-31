@@ -3,6 +3,7 @@ import { createNewUser } from './actions/createNewUser.js';
 import { getAllUsers } from './actions/getAllUsers.js';
 import { getUserById } from './actions/getUserById.js';
 import { updateUser } from './actions/updateUser.js';
+import { deleteUser } from './actions/deleteUser.js';
 
 const PORT = process.env.PORT || 3000;
 
@@ -35,6 +36,13 @@ const server = http.createServer(async (req, res) => {
   if (method === 'PUT' && url?.startsWith('/api/users/')) {
     const userId = url.split('/')[3];
     await updateUser({ req, res, userId });
+    return;
+  }
+
+  // DELETE /api/users/{userId} - Delete user by ID
+  if (method === 'DELETE' && url?.startsWith('/api/users/')) {
+    const userId = url.split('/')[3];
+    await deleteUser({ res, userId });
     return;
   }
 
