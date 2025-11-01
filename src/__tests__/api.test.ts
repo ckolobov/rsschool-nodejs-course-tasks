@@ -1,6 +1,8 @@
 import request from 'supertest';
-import { server } from '../server.js';
+import { createServer } from '../server.js';
 import { userDatabase } from '../database/userDatabase.js';
+
+const server = createServer();
 
 describe('User API Tests', () => {
   beforeEach(() => {
