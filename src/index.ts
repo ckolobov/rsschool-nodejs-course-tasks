@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import http from 'node:http';
 import { createNewUser } from './actions/createNewUser.js';
 import { getAllUsers } from './actions/getAllUsers.js';

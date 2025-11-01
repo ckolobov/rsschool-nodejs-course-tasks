@@ -44,6 +44,7 @@
     "experimentalSpecifierResolution": "node"
   },
   "dependencies": {
+    "dotenv": "^17.2.3",
     "uuid": "^13.0.0"
   }
 }
