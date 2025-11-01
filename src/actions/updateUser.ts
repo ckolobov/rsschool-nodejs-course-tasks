@@ -44,10 +44,10 @@ export const updateUser = async ({ req, res, userId }: UpdateUserParams) => {
     res.statusCode = 200;
     res.end(JSON.stringify(updatedUser));
   } catch (error) {
-    res.statusCode = 400;
+    res.statusCode = 500;
     res.end(
       JSON.stringify({
-        message: error instanceof Error ? error.message : 'Invalid request body',
+        message: error instanceof Error ? error.message : 'Internal server error',
       }),
     );
   }

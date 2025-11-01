@@ -28,10 +28,10 @@ export const createNewUser = async ({req, res}: CreateNewUserParams) => {
     res.statusCode = 201;
     res.end(JSON.stringify(newUser));
   } catch (error) {
-    res.statusCode = 400;
+    res.statusCode = 500;
     res.end(
       JSON.stringify({
-        message: error instanceof Error ? error.message : 'Invalid request body',
+        message: error instanceof Error ? error.message : 'Internal server error',
       }),
     );
   }
