@@ -43,6 +43,11 @@ class UserDatabase {
   delete(id: string): boolean {
     return this.users.delete(id);
   }
+
+  // Clear is needed for testing
+  clear(): void {
+    this.users.clear();
+  }
 }
 
 export const userDatabase = new UserDatabase();
