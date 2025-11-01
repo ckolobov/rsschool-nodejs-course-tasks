@@ -1,6 +1,6 @@
 import http from 'node:http';
 import { validate } from 'uuid';
-import { userDatabase } from '../database/userDatabase.js';
+import { sharedUserDatabase } from '../database/sharedUserDatabase.js';
 
 interface DeleteUserParams {
   res: http.ServerResponse<http.IncomingMessage> & {
@@ -16,7 +16,7 @@ export const deleteUser = async ({ res, userId }: DeleteUserParams) => {
     return;
   }
 
-  const deleted = userDatabase.delete(userId);
+  const deleted = await sharedUserDatabase.delete(userId);
 
   if (!deleted) {
     res.statusCode = 404;

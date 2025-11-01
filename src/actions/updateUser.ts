@@ -1,6 +1,6 @@
 import http from 'node:http';
 import { validate } from 'uuid';
-import { userDatabase } from '../database/userDatabase.js';
+import { sharedUserDatabase } from '../database/sharedUserDatabase.js';
 import { parseJsonBody } from '../helpers/parseJsonBody.js';
 import { validateUpdateUserDto } from '../validation/userDataValidation.js';
 
@@ -33,7 +33,7 @@ export const updateUser = async ({ req, res, userId }: UpdateUserParams) => {
       return;
     }
 
-    const updatedUser = userDatabase.update(userId, body);
+    const updatedUser = await sharedUserDatabase.update(userId, body);
 
     if (!updatedUser) {
       res.statusCode = 404;

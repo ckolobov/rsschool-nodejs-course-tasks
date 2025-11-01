@@ -1,5 +1,5 @@
 import http from 'node:http';
-import { userDatabase } from '../database/userDatabase.js';
+import { sharedUserDatabase } from '../database/sharedUserDatabase.js';
 
 interface GetAllUsersParams {
   res: http.ServerResponse<http.IncomingMessage> & {
@@ -8,7 +8,7 @@ interface GetAllUsersParams {
 }
 
 export const getAllUsers = async ({ res }: GetAllUsersParams) => {
-  const users = userDatabase.getAllUsers();
+  const users = await sharedUserDatabase.getAllUsers();
   res.statusCode = 200;
   res.end(JSON.stringify(users));
 };

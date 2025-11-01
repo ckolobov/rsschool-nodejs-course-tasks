@@ -1,7 +1,7 @@
 import { v4 as uuidV4 } from 'uuid';
 import { User, CreateUserDto } from '../types/user.js';
 
-class UserDatabase {
+export class UserDatabase {
   private users: Map<string, User>;
 
   constructor() {

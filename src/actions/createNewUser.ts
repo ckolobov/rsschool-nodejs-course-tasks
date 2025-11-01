@@ -1,5 +1,5 @@
 import http from 'node:http';
-import { userDatabase } from '../database/userDatabase.js';
+import { sharedUserDatabase } from '../database/sharedUserDatabase.js';
 import { validateCreateUserDto } from '../validation/userDataValidation.js';
 import { parseJsonBody } from '../helpers/parseJsonBody.js';
 
@@ -24,7 +24,7 @@ export const createNewUser = async ({req, res}: CreateNewUserParams) => {
       return;
     }
 
-    const newUser = userDatabase.create(body);
+    const newUser = await sharedUserDatabase.create(body);
     res.statusCode = 201;
     res.end(JSON.stringify(newUser));
   } catch (error) {

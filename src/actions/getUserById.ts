@@ -1,6 +1,6 @@
 import http from 'node:http';
 import { validate } from 'uuid';
-import { userDatabase } from '../database/userDatabase.js';
+import { sharedUserDatabase } from '../database/sharedUserDatabase.js';
 
 interface GetUserByIdParams {
   res: http.ServerResponse<http.IncomingMessage> & {
@@ -16,7 +16,7 @@ export const getUserById = async ({ res, userId }: GetUserByIdParams) => {
     return;
   }
 
-  const user = userDatabase.getUser(userId);
+  const user = await sharedUserDatabase.getUser(userId);
 
   if (!user) {
     res.statusCode = 404;
